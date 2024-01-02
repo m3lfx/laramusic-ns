@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/', function () {
-    return 'Hello world2!';
-    });
+// Route::get('/', function () {
+//     return 'Hello world2!';
+//     });
    
 // Route::get('/books', function () {
 //     return 'Books index.';
@@ -36,13 +36,20 @@ Route::get('/', function () {
         //     }
         //     return "Books in the {$genre} category.";
         //    });
-        Route::get('/books/{genre?}', function ($genre = 'Crime') {
-            return "Books in the {$genre} category.";
-            });
+        // Route::get('/books/{genre?}', function ($genre = 'Crime') {
+        //     return "Books in the {$genre} category.";
+        //     });
 
-            Route::get('/views', function () {
-                return View::make('simple');
-               });
+            // Route::get('/views', function () {
+            //     return View::make('simple');
+            //    });
+
+               Route::get('/{squirrel}', function ($squirrel) {
+                $data['squirrel'] = $squirrel;
+               
+                return View::make('simple', $data);
+                });
+               
                
            
            

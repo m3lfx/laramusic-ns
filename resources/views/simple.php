@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>tes view</h1>
+<p>I wish I were a <?php echo $squirrel; ?> squirrel!</p>
+
 </body>
 </html>
