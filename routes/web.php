@@ -21,13 +21,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return 'Hello world2!';
     });
+   
 Route::get('/books', function () {
     return 'Books index.';
     });
 
-    Route::get('/books/{genre}', function ($genre) {
-        return "Books in the {$genre} category.";
-        });
+    // Route::get('/books/{genre}', function ($genre) {
+    //     return "Books in the {$genre} category.";
+    //     });
+
+        Route::get('/books/{genre?}', function ($genre = null) {
+            if ($genre == null) {
+            return 'Books index.';
+            }
+            return "Books in the {$genre} category.";
+           });
+           
        
        
    
