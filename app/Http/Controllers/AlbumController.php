@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use View;
 use Redirect;
 use App\Models\Album;
+use App\Models\Artist;
 
 class AlbumController extends Controller
 {
@@ -13,5 +14,10 @@ class AlbumController extends Controller
     {
         $albums = Album::all();
         return View::make('album.index', compact('albums'));
+    }
+
+    public function create() {
+        $artists = Artist::all();
+        return View::make('album.create', compact('artists'));
     }
 }

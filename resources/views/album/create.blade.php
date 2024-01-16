@@ -1,12 +1,34 @@
 @extends('layouts.base')
 
 @section('body')
-    <form action="{{url('/artist/store')}}" method="POST">
-        @csrf
-        
-        <input type="text" name="name" >
-        <input type="text" name="country">
-        <input type="text" name="image">
-        <input type="submit" >
-    </form>
+    {{-- {{ dd($artists) }} --}}
+    <div class="container">
+        <form action="{{ url('/artist/store') }}" method="POST">
+            @csrf
+
+            <div class="mb-3">
+                <label for="album_name" class="form-label">Album Name</label>
+                <input type="text" class="form-control" id="album_name" placeholder="album title">
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">genre</label>
+                <input type="text" class="form-control" id="genre" placeholder="kpop pop">
+            </div>
+            <div class="mb-3">
+                <label for="date_released" class="form-label">Date Released</label>
+                <input type="date" class="form-control" id="date_released">
+            </div>
+            <div class="mb-3">
+                <label for="artists" class="form-label">Pick An Artist</label>
+                <select class="form-select" aria-label="Default select example">
+            </div>
+            <option selected>Open this select menu</option>
+            @foreach ($artists as $artist)
+                <option value="{{ $artist->id }}">{{ $artist->name }}</option>
+            @endforeach
+            </select>
+
+            <button class="btn btn-primary" type="submit">Add Album</button>
+        </form>
+    </div>
 @endsection
