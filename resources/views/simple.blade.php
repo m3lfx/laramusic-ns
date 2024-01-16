@@ -8,7 +8,26 @@
 </head>
 
 <body>
-    <p>I wish I were a <b>{{ $squirrel }}</b> squirrel!</p>
+    @include('includes/header')
+    @include('includes/footer')
+    @if ($something == 'Red Panda')
+        <p>Something is red, white, and brown!</p>
+    @elseif ($something == 'Giant Panda')
+        <p>Something is black and white!</p>
+    @else
+        <p>Something could be a squirrel.</p>
+    @endif
+
+    @foreach ($manyThings as $thing)
+        <p>{{ $thing }}</p>
+    @endforeach
+    @for ($i = 0; $i < 100; $i++)
+        <p>Even {{ $i }} red pandas, aren't enough!</p>
+    @endfor
+    
+
+
+
 
 </body>
 

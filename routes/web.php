@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArtistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,46 +14,57 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/artist',[ArtistController::class, 'index']);
+Route::get('/artist/create', [ArtistController::class, 'create']);
+Route::post('/artist/store', [ArtistController::class, 'store']);
+Route::get('/artist/{id}/edit', [ArtistController::class, 'edit']);
+Route::post('/artist/{id}/update', [ArtistController::class, 'update']);
+Route::get('/artist/{id}/delete', [ArtistController::class, 'delete']);
 
-
+Route::get('/db', function () {
+    // Schema::create('artists', function ($table) {
+    //     $table->increments('id');
+    //     $table->text('name');
+    //     $table->string('username', 32);
+    //     $table->string('email', 320);
+    //     $table->string('password', 60);
+    //     $table->timestamps();
+    // });
+    Schema::create('example', function($table) {
+        $table->string('name')->default('John Doe');
+        });
+        
+});
+   
 // Route::get('/', function () {
 //     return 'Hello world2!';
 //     });
-   
+
 // Route::get('/books', function () {
 //     return 'Books index.';
 //     });
 
-    // Route::get('/books/{genre}', function ($genre) {
-    //     return "Books in the {$genre} category.";
-    //     });
+// Route::get('/books/{genre}', function ($genre) {
+//     return "Books in the {$genre} category.";
+//     });
 
-        // Route::get('/books/{genre?}', function ($genre = 'Crime') {
-        //     if ($genre == null) {
-        //     return 'Books index.';
-        //     }
-        //     return "Books in the {$genre} category.";
-        //    });
-        // Route::get('/books/{genre?}', function ($genre = 'Crime') {
-        //     return "Books in the {$genre} category.";
-        //     });
+// Route::get('/books/{genre?}', function ($genre = 'Crime') {
+//     if ($genre == null) {
+//     return 'Books index.';
+//     }
+//     return "Books in the {$genre} category.";
+//    });
+// Route::get('/books/{genre?}', function ($genre = 'Crime') {
+//     return "Books in the {$genre} category.";
+//     });
 
-            // Route::get('/views', function () {
-            //     return View::make('simple');
-            //    });
+// Route::get('/views', function () {
+//     return View::make('simple');
+//    });
 
-               Route::get('/{squirrel}', function ($squirrel) {
-                $data['squirrel'] = $squirrel;
-               
-                return View::make('simple', $data);
-                });
-               
-               
-           
-           
-       
-       
-   
+// Route::get('/{squirrel}', function ($squirrel) {
+//     $data['something'] = 'Giant Panda';
+//     $data['manyThings'] = array('one', 'two', 3);
+
+//     return View::make('simple', $data);
+// });
