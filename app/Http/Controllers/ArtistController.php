@@ -55,12 +55,12 @@ class ArtistController extends Controller
         $artist->country = $request->country;
         $artist->img_path = $request->image;
         $artist->save();
-        return 'from update';
+        return Redirect::to('artist');
     }
 
     public function delete($id)
     {
         Artist::destroy($id);
-        return $id;
+        return Redirect::to('artist');
     }
 }
