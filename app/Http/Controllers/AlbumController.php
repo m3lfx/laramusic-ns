@@ -36,4 +36,11 @@ class AlbumController extends Controller
         
         
     }
+
+    public function edit($id)
+    {
+        $album = Album::find($id);
+       
+        return View::make('album.edit', compact('album'));
+    }
 }
