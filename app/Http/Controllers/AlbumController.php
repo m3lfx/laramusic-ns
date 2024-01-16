@@ -40,7 +40,8 @@ class AlbumController extends Controller
     public function edit($id)
     {
         $album = Album::find($id);
+        $artists = Artist::all();
        
-        return View::make('album.edit', compact('album'));
+        return View::make('album.edit', compact('album', 'artists'));
     }
 }

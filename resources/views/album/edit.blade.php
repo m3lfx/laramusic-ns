@@ -3,7 +3,7 @@
 @section('body')
     
     <div class="container">
-        <form action="{{ route('album.update') }}" method="POST">
+        <form action="{{ route('album.update', ['id' => $album->id]) }}" method="POST">
             @csrf
 
             <div class="mb-3">
