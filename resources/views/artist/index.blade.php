@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('body')
-<table>
+<table class="table table-striped table-hover">
     @foreach($artists as $artist)
     <tr>
         <td>{{$artist->id}}</td>
