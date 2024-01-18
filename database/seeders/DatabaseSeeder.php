@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\ArtistSeeder;
+use Database\Seeders\AlbumSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(ArtistSeeder::class);
+        $this->call(AlbumSeeder::class);
     }
 }
