@@ -21,7 +21,7 @@ class SongController extends Controller
         $songs = DB::table('songs')
             ->join('albums', 'albums.id', '=', 'songs.album_id')
             ->select('songs.id', 'songs.title as song_name', 'songs.description', 'albums.title as album_title' )
-            ->get();
+            ->paginate(15);
         // dd($songs);
         return View::make('song.index', compact('songs'));
     }

@@ -12,12 +12,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($songs as $songs)
+            @foreach ($songs as $song)
                 <tr>
-                    <td>{{ $songs->id }}</td>
-                    <td>{{ $songs->song_name }}</td>
-                    <td>{{ $songs->description }}</td>
-                    <td>{{ $songs->album_title }}</td>
+                    <td>{{ $song->id }}</td>
+                    <td>{{ $song->song_name }}</td>
+                    <td>{{ $song->description }}</td>
+                    <td>{{ $song->album_title }}</td>
                     {{-- <td><a href="{{route('songs.edit', ['id' => $songs->id])}}"><i class="fas fa-edit"></i></a></td>
         <td><a href="{{route('songs.delete', ['id' => $songs->id])}}"><i class="fas fa-trash" style="color:red"></i></a></td> --}}
                 </tr>
@@ -26,5 +26,5 @@
 
     </table>
 
-    {{-- {{$songss->links()}} --}}
+    {{$songs->links()}}
 @endsection
