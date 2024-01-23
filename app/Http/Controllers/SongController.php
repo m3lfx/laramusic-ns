@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Song;
-
+use App\Models\Album;
 use DB;
 use View;
+use Validator;
+
 
 class SongController extends Controller
 {
@@ -33,7 +35,8 @@ class SongController extends Controller
      */
     public function create()
     {
-        //
+        $albums = Album::all();
+        return View::make('song.create', compact('albums'));
     }
 
     /**
@@ -44,7 +47,32 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $validatedData = $request->validate([
+        //     'title' => ['required', 'max:30'],
+        //     'description' => ['required', 'min:5', 'max:200'],
+        //     'album_id' =>'required'
+        // ]);
+        // dd($request->all());
+        $rules = [
+            'title' => ['required', 'max:30'],
+            'description' => ['required', 'min:5', 'max:200'],
+            'album_id' =>'required'
+        ];
+        $messages = ['title.required' => 'ito ay  kailangan', 'description.required' =>'may laman dapat', 'min' => 'too short'];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        // dd($validatedData);
+        // if ($validator->fails()) {
+        //     return redirect('songs/create')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
+         if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
+        
     }
 
     /**

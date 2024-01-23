@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('body')
-    <div><a class="btn btn-primary " href="{{ url('/songs/create') }}" aria-disabled="true">create songs</a></div>
+    <div><a class="btn btn-primary " href="{{ route('songs.create') }}" aria-disabled="true">create songs</a></div>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -18,8 +18,8 @@
                     <td>{{ $song->song_name }}</td>
                     <td>{{ $song->description }}</td>
                     <td>{{ $song->album_title }}</td>
-                    {{-- <td><a href="{{route('songs.edit', ['id' => $songs->id])}}"><i class="fas fa-edit"></i></a></td>
-        <td><a href="{{route('songs.delete', ['id' => $songs->id])}}"><i class="fas fa-trash" style="color:red"></i></a></td> --}}
+                    <td><a href="{{route('songs.edit', ['song' => $song->id])}}"><i class="fas fa-edit"></i></a></td>
+        <td><a href="{{route('songs.destroy', ['song' => $song->id])}}"><i class="fas fa-trash" style="color:red"></i></a></td>
                 </tr>
             @endforeach
         </tbody>
