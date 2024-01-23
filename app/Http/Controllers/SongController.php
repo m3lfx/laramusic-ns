@@ -101,7 +101,13 @@ class SongController extends Controller
      */
     public function edit($id)
     {
-        //
+        $song = Song::find($id);
+        $album = Album::where('id', $song->album_id)->first();
+        // dd($album);
+        // $albums = Album::all();
+        $albums = Album::where('id', '<>', $song->album_id)->get();
+       
+        return View::make('song.edit', compact('albums', 'song', 'album'));
     }
 
     /**
