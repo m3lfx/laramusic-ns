@@ -18,13 +18,21 @@
                     <td>{{ $song->song_name }}</td>
                     <td>{{ $song->description }}</td>
                     <td>{{ $song->album_title }}</td>
-                    <td><a href="{{route('songs.edit', ['song' => $song->id])}}"><i class="fas fa-edit"></i></a></td>
-        <td><a href="{{route('songs.destroy', ['song' => $song->id])}}"><i class="fas fa-trash" style="color:red"></i></a></td>
+                    <td><a href="{{ route('songs.edit', ['song' => $song->id]) }}"><i class="fas fa-edit"></i></a></td>
+                    <td>
+                        <form action="{{ route('songs.destroy', $song->id) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            
+                            <button><i class="fas fa-trash"
+                                style="color:red"></i></button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
 
     </table>
 
-    {{$songs->links()}}
+    {{ $songs->links() }}
 @endsection

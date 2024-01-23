@@ -148,6 +148,8 @@ class SongController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd($id);
+        $song = Song::destroy($id);
+        return redirect()->back();
     }
 }
