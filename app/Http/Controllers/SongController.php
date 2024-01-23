@@ -23,6 +23,7 @@ class SongController extends Controller
         $songs = DB::table('songs')
             ->join('albums', 'albums.id', '=', 'songs.album_id')
             ->select('songs.id', 'songs.title as song_name', 'songs.description', 'albums.title as album_title' )
+            ->orderBy('songs.id','DESC')
             ->paginate(15);
         // dd($songs);
         return View::make('song.index', compact('songs'));
@@ -46,13 +47,8 @@ class SongController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // $validatedData = $request->validate([
-        //     'title' => ['required', 'max:30'],
-        //     'description' => ['required', 'min:5', 'max:200'],
-        //     'album_id' =>'required'
-        // ]);
-        // dd($request->all());
+    {       
+        // dd($request->description);
         $rules = [
             'title' => ['required', 'max:30'],
             'description' => ['required', 'min:5', 'max:200'],
@@ -60,18 +56,29 @@ class SongController extends Controller
         ];
         $messages = ['title.required' => 'ito ay  kailangan', 'description.required' =>'may laman dapat', 'min' => 'too short'];
         $validator = Validator::make($request->all(), $rules, $messages);
+        
+         if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        // $validatedData = $request->validate([
+        //     'title' => ['required', 'max:30'],
+        //     'description' => ['required', 'min:5', 'max:200'],
+        //     'album_id' =>'required'
+        // ]);
+        // dd($request->all());
         // dd($validatedData);
         // if ($validator->fails()) {
         //     return redirect('songs/create')
         //                 ->withErrors($validator)
         //                 ->withInput();
         // }
-         if ($validator->fails()) {
-            return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-        
+        $song = Song::create(['title' => $request->title,
+        'description' => $request->description,
+        'album_id' => $request->album_id]);
+        return redirect()->route('songs.index');
+
         
     }
 
