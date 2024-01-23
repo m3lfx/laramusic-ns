@@ -119,7 +119,25 @@ class SongController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $rules = [
+            'title' => ['required', 'max:30'],
+            'description' => ['required', 'min:5', 'max:200'],
+            'album_id' =>'required'
+        ];
+        $messages = ['title.required' => 'ito ay  kailangan', 'description.required' =>'may laman dapat', 'min' => 'too short'];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+         if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        $song = Song::where('id', $id)->update(['title' => $request->title,
+        'description' => $request->description,
+        'album_id' => $request->album_id]);
+        return redirect()->route('songs.index');
+        
     }
 
     /**
