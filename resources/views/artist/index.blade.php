@@ -14,4 +14,5 @@
     @endforeach
     
 </table>
+{{$artists->links()}}
 @endsection

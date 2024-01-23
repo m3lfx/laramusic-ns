@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\ArtistSeeder;
 use Database\Seeders\AlbumSeeder;
+use Database\Seeders\SongSeeder;
 
 class DatabaseSeeder extends Seeder
 {

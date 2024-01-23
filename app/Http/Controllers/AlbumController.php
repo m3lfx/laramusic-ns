@@ -12,7 +12,7 @@ class AlbumController extends Controller
 {
     public function index()
     {
-        $albums = Album::all();
+        $albums = Album::paginate(10);
         return View::make('album.index', compact('albums'));
     }
 

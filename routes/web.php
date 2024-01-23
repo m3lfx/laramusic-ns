@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtistController;
-use App\Http\Controllers\ALbumController;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\SongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::prefix('album')->group(function () {
     Route::post('/{id}/update', [ArtistController::class, 'update'])->name('album.update');
     Route::get('/{id}/delete', [ArtistController::class, 'delete'])->name('album.delete');
 });
+
+Route::resource('songs', SongController::class);
 
 
 

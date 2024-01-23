@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('body')
-<div><a class="btn btn-primary " href="{{url('/album/create')}}" aria-disabled="true">create album</a></div>
+<div><a class="btn btn-primary " href="{{url('/song/create')}}" aria-disabled="true">create album</a></div>
 <table class="table table-striped table-hover">
     @foreach($albums as $album)
     <tr>
@@ -14,4 +14,6 @@
     @endforeach
     
 </table>
+
+{{$albums->links()}}
 @endsection
