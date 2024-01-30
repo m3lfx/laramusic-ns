@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Storage;
+use Validator; 
+use App\Models\Listener;
 
 class ListenerController extends Controller
 {
@@ -34,7 +37,36 @@ class ListenerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->file('img_path'));
+        $rules = [
+            'img_path' => 'mimes:jpg,bmp,png',
+           
+        ];
+       
+        $validator = Validator::make($request->all(), $rules);
+        
+         if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        $listener = new Listener();
+        $listener->name = $request->last_name . ' ' . $request->first_name;
+        $listener->address = $request->address;
+        // $path = Storage::putFile('images', $request->file('img_path'));
+        //   dd($path);
+        // $path = $request->file('img_path')->store('images');
+        $name = $request->file('img_path')->getClientOriginalName();
+        $extension =$request->file('img_path')->getClientOriginalExtension();
+
+        $path = Storage::putFileAs(
+            'images',
+            $request->file('img_path'),
+            $name
+        );
+        $listener->img_path = $path;
+        $listener->save();
+        return redirect()->route('listeners.index');
     }
 
     /**
