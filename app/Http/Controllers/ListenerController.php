@@ -16,7 +16,9 @@ class ListenerController extends Controller
      */
     public function index()
     {
-        //
+        $listeners = Listener::all();
+        
+        return view('listener.index', compact('listeners'));
     }
 
     /**
@@ -60,11 +62,11 @@ class ListenerController extends Controller
         $extension =$request->file('img_path')->getClientOriginalExtension();
 
         $path = Storage::putFileAs(
-            'images',
+            'public/images',
             $request->file('img_path'),
             $name
         );
-        $listener->img_path = $path;
+        $listener->img_path = 'storage/images/'.$name;
         $listener->save();
         return redirect()->route('listeners.index');
     }
