@@ -154,6 +154,9 @@ class SongController extends Controller
     }
 
     public function search(Request $request) {
-        
+        // dd($request);
+        $results = DB::table('songs')->where('title', 'LIKE', '%'.$request->search.'%')->get();
+        // dd($result);
+        return view('song.search', compact('results'));
     }
 }
