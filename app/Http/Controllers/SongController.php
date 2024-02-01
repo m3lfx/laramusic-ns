@@ -22,8 +22,8 @@ class SongController extends Controller
         //    $songs = Song::all();
         $songs = DB::table('songs')
             ->join('albums', 'albums.id', '=', 'songs.album_id')
-            ->select('songs.id', 'songs.title as song_name', 'songs.description', 'albums.title as album_title' )
-            ->orderBy('songs.id','DESC')
+            ->select('songs.id', 'songs.title as song_name', 'songs.description', 'albums.title as album_title')
+            ->orderBy('songs.id', 'DESC')
             ->paginate(15);
         // dd($songs);
         return View::make('song.index', compact('songs'));
@@ -47,20 +47,20 @@ class SongController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {       
+    {
         // dd($request->description);
         $rules = [
             'title' => ['required', 'max:30'],
             'description' => ['required', 'min:5', 'max:200'],
-            'album_id' =>'required'
+            'album_id' => 'required'
         ];
-        $messages = ['title.required' => 'ito ay  kailangan', 'description.required' =>'may laman dapat', 'min' => 'too short'];
+        $messages = ['title.required' => 'ito ay  kailangan', 'description.required' => 'may laman dapat', 'min' => 'too short'];
         $validator = Validator::make($request->all(), $rules, $messages);
-        
-         if ($validator->fails()) {
+
+        if ($validator->fails()) {
             return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
         // $validatedData = $request->validate([
         //     'title' => ['required', 'max:30'],
@@ -74,12 +74,12 @@ class SongController extends Controller
         //                 ->withErrors($validator)
         //                 ->withInput();
         // }
-        $song = Song::create(['title' => $request->title,
-        'description' => $request->description,
-        'album_id' => $request->album_id]);
+        $song = Song::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'album_id' => $request->album_id
+        ]);
         return redirect()->route('songs.index');
-
-        
     }
 
     /**
@@ -106,7 +106,7 @@ class SongController extends Controller
         // dd($album);
         // $albums = Album::all();
         $albums = Album::where('id', '<>', $song->album_id)->get();
-       
+
         return View::make('song.edit', compact('albums', 'song', 'album'));
     }
 
@@ -123,21 +123,22 @@ class SongController extends Controller
         $rules = [
             'title' => ['required', 'max:30'],
             'description' => ['required', 'min:5', 'max:200'],
-            'album_id' =>'required'
+            'album_id' => 'required'
         ];
-        $messages = ['title.required' => 'ito ay  kailangan', 'description.required' =>'may laman dapat', 'min' => 'too short'];
+        $messages = ['title.required' => 'ito ay  kailangan', 'description.required' => 'may laman dapat', 'min' => 'too short'];
         $validator = Validator::make($request->all(), $rules, $messages);
-        
-         if ($validator->fails()) {
+
+        if ($validator->fails()) {
             return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
-        $song = Song::where('id', $id)->update(['title' => $request->title,
-        'description' => $request->description,
-        'album_id' => $request->album_id]);
+        $song = Song::where('id', $id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'album_id' => $request->album_id
+        ]);
         return redirect()->route('songs.index');
-        
     }
 
     /**
@@ -153,10 +154,16 @@ class SongController extends Controller
         return redirect()->back();
     }
 
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         // dd($request);
-        $results = DB::table('songs')->where('title', 'LIKE', '%'.$request->search.'%')->get();
-        // dd($result);
+        $results = DB::table('songs')
+            ->join('albums','albums.id', '=', 'songs.album_id')
+            ->where('songs.title', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('description', 'LIKE', '%' . $request->search . '%')
+            ->select('albums.title as album_title', 'songs.id', 'songs.title as song_title', 'songs.description')
+            ->get();
+        // dd($results);
         return view('song.search', compact('results'));
     }
 }

@@ -24,9 +24,9 @@
             @foreach ($results as $result)
                 <tr>
                     <td>{{ $result->id }}</td>
-                    <td>{{ $result->title }}</td>
+                    <td>{{ $result->song_title }}</td>
                     <td>{{ $result->description }}</td>
-                    {{-- <td>{{ $song->album_title }}</td> --}}
+                    <td>{{ $result->album_title }}</td>
                     <td><a href="{{ route('songs.edit', ['song' => $result->id]) }}"><i class="fas fa-edit"></i></a></td>
                     <td>
                         <form action="{{ route('songs.destroy', $result->id) }}" method="POST">
