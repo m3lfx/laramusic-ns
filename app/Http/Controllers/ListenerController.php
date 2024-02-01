@@ -90,7 +90,8 @@ class ListenerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $listener = Listener::find($id);
+        return view('listener.edit', compact('listener'));
     }
 
     /**
