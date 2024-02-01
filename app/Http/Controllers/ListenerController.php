@@ -139,7 +139,6 @@ class ListenerController extends Controller
 
     public function restore($id) {
         $listener = Listener::withTrashed()->where('id', $id)->restore();
-       
         return redirect()->route('listeners.index');
     }
 }

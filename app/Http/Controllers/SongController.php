@@ -152,4 +152,8 @@ class SongController extends Controller
         $song = Song::destroy($id);
         return redirect()->back();
     }
+
+    public function search(Request $request) {
+        
+    }
 }

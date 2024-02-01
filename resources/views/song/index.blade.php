@@ -1,6 +1,15 @@
 @extends('layouts.base')
 @section('body')
     <div><a class="btn btn-primary " href="{{ route('songs.create') }}" aria-disabled="true">create songs</a></div>
+    <div class="container">
+        {!! Form::open( ['route' => ['listeners.store'], 'class' => 'form-control', 'placeholder' => 'Search Here...']) !!}
+       
+        {!! Form::text('search') !!}
+        
+        {!! Form::submit('submit', ['class' => 'btn btn-primary']) !!}
+        {!! Form::close() !!}
+    </div>
+    
     <table class="table table-striped table-hover">
         <thead>
             <tr>
