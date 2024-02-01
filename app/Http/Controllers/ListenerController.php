@@ -16,7 +16,8 @@ class ListenerController extends Controller
      */
     public function index()
     {
-        $listeners = Listener::all();
+        // $listeners = Listener::all();
+        $listeners = Listener::withTrashed()->get();
         
         return view('listener.index', compact('listeners'));
     }
@@ -133,6 +134,12 @@ class ListenerController extends Controller
     public function destroy($id)
     {
         Listener::destroy($id);
+        return redirect()->route('listeners.index');
+    }
+
+    public function restore($id) {
+        $listener = Listener::withTrashed()->where('id', $id)->restore();
+       
         return redirect()->route('listeners.index');
     }
 }
