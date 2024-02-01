@@ -1,6 +1,5 @@
 @extends('layouts.base')
 @section('body')
-
     <div class="container">
         {!! Form::model($listener, ['route' => ['listeners.update', $listener->id], 'class' => 'form-control',  'files' => true, 'method' => 'put']) !!}
         {{ Form::label('name', 'full name', ['class' => 'form-control']) }}
