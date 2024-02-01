@@ -15,7 +15,7 @@
             @foreach ($listeners as $listener)
                 <tr>
                     <td>{{ $listener->id }}</td>
-                    <td><img src="{{ url($listener->img_path) }}" alt="listener image" width="250" height="250">  </td>
+                    <td><img src="{{ url($listener->img_path) }}" alt="listener image" width="50" height="50">  </td>
                     <td>{{ $listener->name }}</td>
                     <td>{{ $listener->address }}</td>
                     

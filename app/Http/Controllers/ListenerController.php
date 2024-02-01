@@ -132,6 +132,7 @@ class ListenerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Listener::destroy($id);
+        return redirect()->route('listeners.index');
     }
 }
