@@ -15,8 +15,10 @@
             <tr>
                 <th scope="col">song id</th>
                 <th scope="col">song name</th>
+                <th scope="col">artist name</th>
                 <th scope="col">description</th>
                 <th scope="col">album title</th>
+                
                 <th>action</th>
             </tr>
         </thead>
@@ -25,6 +27,7 @@
                 <tr>
                     <td>{{ $result->id }}</td>
                     <td>{{ $result->song_title }}</td>
+                    <td>{{ $result->name }}</td>
                     <td>{{ $result->description }}</td>
                     <td>{{ $result->album_title }}</td>
                     <td><a href="{{ route('songs.edit', ['song' => $result->id]) }}"><i class="fas fa-edit"></i></a></td>

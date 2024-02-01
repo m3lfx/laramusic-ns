@@ -159,9 +159,10 @@ class SongController extends Controller
         // dd($request);
         $results = DB::table('songs')
             ->join('albums','albums.id', '=', 'songs.album_id')
+            ->join('artists','artists.id', '=', 'albums.artist_id')
             ->where('songs.title', 'LIKE', '%' . $request->search . '%')
             ->orWhere('description', 'LIKE', '%' . $request->search . '%')
-            ->select('albums.title as album_title', 'songs.id', 'songs.title as song_title', 'songs.description')
+            ->select('albums.title as album_title', 'songs.id', 'songs.title as song_title', 'songs.description', 'artists.name')
             ->get();
         // dd($results);
         return view('song.search', compact('results'));
