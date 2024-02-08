@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Storage;
 use Validator; 
 use App\Models\Listener;
+use App\Models\Album;
 
 class ListenerController extends Controller
 {
@@ -140,5 +141,13 @@ class ListenerController extends Controller
     public function restore($id) {
         $listener = Listener::withTrashed()->where('id', $id)->restore();
         return redirect()->route('listeners.index');
+    }
+
+    public function addAlbums() {
+        $albums = Album::all();
+        // dd(Auth::user()->id);
+        // dd(Auth::id());
+        // dd($albums);
+        return view('listener.add_album', compact('albums'));
     }
 }
