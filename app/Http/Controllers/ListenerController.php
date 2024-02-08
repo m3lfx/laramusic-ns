@@ -171,5 +171,6 @@ class ListenerController extends Controller
 
 //composer require laravel/ui
 // php artisan ui bootstrap --auth
-// npm install && npm run dev
+// npm install 
+// npm run dev
 // npm run dev
