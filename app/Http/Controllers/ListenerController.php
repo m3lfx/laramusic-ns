@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Storage;
 use Validator; 
+use DB;
+
 use App\Models\Listener;
 use App\Models\Album;
 
@@ -149,5 +151,20 @@ class ListenerController extends Controller
         // dd(Auth::id());
         // dd($albums);
         return view('listener.add_album', compact('albums'));
+    }
+
+    public function addAlbumListener(Request $request) {
+    //    dd($request->album);
+        $listener_id = 5;
+        foreach($request->album as $album_id) {
+            // dump($album_id);
+            DB::table('album_listener')->insert([
+                'album_id' => $album_id,
+                'listener_id' => $listener_id,
+                'created_at' => now()
+            ]);
+        }
+        // dd($request->album);
+        return redirect()->route('listeners.index');
     }
 }
