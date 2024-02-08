@@ -1,15 +1,8 @@
-@extends('layouts.base')
-
-@section('head')
-    @parent
-    <link rel="stylesheet" href="another.css" />
-@stop
+@extends('layouts.app')
 
 
-@section('body')
-    {{-- {{dd($artists)}} --}}
-    @foreach ($artists as $artist)
-        <h2>{{ $artist->name }}</h2>
-        <p>{{ $artist->country }}</p>
-    @endforeach
+
+
+@section('content')
+  <h1>home</h1>
 @stop
