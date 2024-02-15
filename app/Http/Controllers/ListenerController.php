@@ -206,6 +206,7 @@ class ListenerController extends Controller
                 ]);
             }
         }
+        return redirect()->route('listeners.editAlbumListener');
     }
 }
 
