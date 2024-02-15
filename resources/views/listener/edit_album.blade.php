@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
 
-        {{-- {!! Form::open(['route' => 'listeners.updateAlbums', 'class' => 'form-control']) !!} --}}
+        {!! Form::open(['route' => 'listeners.updateAlbums', 'class' => 'form-control']) !!}
         @foreach ($albums as $album)
      
             @if (in_array($album->id, $myAlbums))

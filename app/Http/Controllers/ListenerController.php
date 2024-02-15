@@ -189,6 +189,24 @@ class ListenerController extends Controller
        
         return view('listener.edit_album', compact('listener', 'myAlbums', 'albums'));
     }
+
+    public function updateAlbums(Request $request)
+    {
+        // dd($request->album_id);
+        $listener = Listener::where('user_id', Auth::id())->select('id')->first();
+        // dd($listener->id);
+        $deleted = DB::table('album_listener')->where('listener_id', $listener->id)->delete();
+        if (!empty($request->album_id)) {
+            foreach ($request->album_id as $album_id) {
+                DB::table('album_listener')->insert([
+                    'album_id' => $album_id,
+                    'listener_id' => $listener->id,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        }
+    }
 }
 
 //composer require laravel/ui

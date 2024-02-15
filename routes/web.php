@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/{id}/delete', [ArtistController::class, 'delete'])->name('album.delete');
     });
     Route::get('/listeners/edit-album', [ListenerController::class, 'editAlbumListener'])->name('listeners.editAlbumListener');
+    Route::post('/listeners/update-albums', [ListenerController::class, 'updateAlbums'])->name('listeners.updateAlbums');
     Route::resource('songs', SongController::class);
     Route::resource('listeners', ListenerController::class);
 });
