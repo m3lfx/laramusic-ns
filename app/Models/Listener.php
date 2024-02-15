@@ -10,4 +10,8 @@ class Listener extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $fillable = [
+        'name',
+        'user_id'
+    ];
 }
