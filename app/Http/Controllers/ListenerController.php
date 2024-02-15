@@ -159,11 +159,13 @@ class ListenerController extends Controller
     //    dd($request->album);
    
         // $listener_id = 5;
+        $listener = Listener::where('user_id',Auth::id())->first();
+        // dd($listener);
         foreach($request->album as $album_id) {
             // dump($album_id);
             DB::table('album_listener')->insert([
                 'album_id' => $album_id,
-                'listener_id' => Auth::id(),
+                'listener_id' => $listener->id,
                 'created_at' => now()
             ]);
         }
