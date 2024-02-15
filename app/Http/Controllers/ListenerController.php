@@ -172,6 +172,23 @@ class ListenerController extends Controller
         // dd($request->album);
         return redirect()->route('listeners.index');
     }
+
+    public function editAlbumListener()
+    {
+        $listener = Listener::where('user_id', Auth::id())
+            ->select('id')
+            ->first();
+            // dd($listener);
+        $myAlbums = DB::table('albums')->join('album_listener', 'albums.id', '=', 'album_listener.album_id')->where('listener_id', $listener->id)->pluck('albums.id')->toArray();
+        // dd($myAlbums);
+        
+        // dump($myAlbums->id);
+        // dd($myAlbums);
+        $albums = Album::all();
+        // dd($albums);
+       
+        return view('listener.edit_album', compact('listener', 'myAlbums', 'albums'));
+    }
 }
 
 //composer require laravel/ui
